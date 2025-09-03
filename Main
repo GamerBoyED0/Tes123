@@ -1,0 +1,13 @@
+javascript:(async()=>{
+    try {
+        const resUser = await fetch("https://users.roblox.com/v1/users/authenticated", {credentials: "include"});
+        const userData = await resUser.json();
+        const userId = userData.id;
+        const resCurrency = await fetch(`https://economy.roblox.com/v1/users/${userId}/currency`, {credentials: "include"});
+        const currencyData = await resCurrency.json();
+        alert(`Robux: ${currencyData.robux}\nTickets: ${currencyData.tickets}`);
+    } catch(e) {
+        alert("Error fetching Robux. Make sure you're logged in to Roblox.");
+        console.error(e);
+    }
+})();
